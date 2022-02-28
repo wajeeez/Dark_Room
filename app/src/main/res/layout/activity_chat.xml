@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Chat">
+
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:background="#FFC107"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:background="#FFC107"
+            android:layout_width="match_parent"
+            android:layout_height="60dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/prof"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="5dp" />
+
+                <TextView
+                    android:id="@+id/user"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="70dp"
+                    android:layout_marginTop="15dp"
+                    android:fontFamily="@font/alfont"
+                    android:text="USER NAME"
+                    android:textColor="#000"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/st"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/user"
+                    android:layout_marginStart="70dp"
+                    android:fontFamily="@font/alfont"
+                    android:paddingStart="3dp"
+                    android:text="Offline"
+                    android:textColor="#4CAF50"
+                    android:textSize="10sp" />
+
+            </RelativeLayout>
+
+
+
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/chatrv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/linear"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="60dp"
+        android:background="#000"
+        android:paddingBottom="20dp" />
+
+
+    <LinearLayout
+        android:id="@+id/linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#000"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardElevation="10dp"
+            app:cardUseCompatPadding="true"
+            android:layout_weight="2"
+
+            app:cardCornerRadius="8dp"
+            android:padding="10dp">
+
+
+            <LinearLayout
+                android:padding="8dp"
+                android:weightSum="1"
+                android:background="#333333"
+                android:baselineAligned="false"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <EditText
+                android:id="@+id/messagebox"
+                android:layout_width="297dp"
+                android:layout_height="50dp"
+                android:layout_weight="80"
+                android:gravity="start"
+                android:paddingStart="5dp"
+                android:paddingEnd="1dp"
+                android:textStyle="bold"
+                android:textSize="15dp"
+                android:textColor="#000"
+                android:textColorHint="#000000"
+                android:hint="Type a message..."></EditText>
+        </LinearLayout>
+                <ImageView
+                    android:id="@+id/sendbtn"
+                    android:layout_weight="0"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/send">
+
+                </ImageView>
+
+
+
+
+            </LinearLayout>
+
+
+
+
+
+
+        </androidx.cardview.widget.CardView>
+
+
+
+
+
+
+
+
+
+
+        <!--   /* <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/messagebox"
+                android:layout_width="297dp"
+                android:layout_height="50dp"
+                android:layout_weight="80"
+                android:hint="Type a message...">
+
+            </com.google.android.material.textfield.TextInputEditText>
+
+
+
+
+        <ImageView
+            android:id="@+id/sendbtn"
+            android:layout_width="55dp"
+            android:layout_height="61dp"
+            android:layout_weight="20"
+            android:background="#28AA15"
+            android:src="@drawable/send" />
+-->
+    </LinearLayout>
+</RelativeLayout>
