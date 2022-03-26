@@ -21,8 +21,6 @@ class MessageAdapter(val context:Context , val messageList:ArrayList<Message>): 
             val view = LayoutInflater.from(context).inflate(R.layout.send,parent,false)
             return SentViewHolder(view)
         }
-
-
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -47,6 +45,7 @@ class MessageAdapter(val context:Context , val messageList:ArrayList<Message>): 
     override fun getItemViewType(position: Int): Int {
        val currentMessage=messageList[position]
         if(FirebaseAuth.getInstance().currentUser?.uid .equals(currentMessage?.senderId)){
+
             return Item_Sent
 
         }else{

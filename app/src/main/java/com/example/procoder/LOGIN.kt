@@ -52,10 +52,6 @@ class LOGIN : AppCompatActivity() {
             startActivity(intent)
         }*/
 
-
-
-
-
        signup.setOnClickListener {
            val intent = Intent(this,Signup::class.java)
            startActivity(intent)
@@ -73,10 +69,6 @@ class LOGIN : AppCompatActivity() {
                 login(email,pass);
             }
         }
-
-
-
-
 
     }
 
@@ -125,11 +117,11 @@ class LOGIN : AppCompatActivity() {
     private fun checksession(){
         sharedPreferences = getSharedPreferences("logindata",MODE_PRIVATE)
         val counter = sharedPreferences.getBoolean("logincounter",(MODE_PRIVATE.toString().toBoolean()))
-        val email = sharedPreferences.getString("Email", MODE_PRIVATE.toString() )
         if(counter){
-            Toast.makeText(this,"WELCOME " + email,Toast.LENGTH_SHORT).show()
+
             val intent= Intent(this,Chatscreen::class.java)
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            finish()
             startActivity(intent)
         }else{
 

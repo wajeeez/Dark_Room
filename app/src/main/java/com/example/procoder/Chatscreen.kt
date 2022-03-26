@@ -20,8 +20,13 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import android.widget.Toolbar
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.bumptech.glide.Glide
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
+import de.hdodenhof.circleimageview.CircleImageView
+import java.io.File
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
@@ -34,6 +39,7 @@ class Chatscreen : AppCompatActivity() {
     private lateinit var userList:ArrayList<Users>
     private lateinit var adapter: UserAdapter
     private lateinit var mAuth:FirebaseAuth
+    private lateinit var profile:CircleImageView
     private lateinit var mDbref:DatabaseReference
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
     private lateinit var toolbar:androidx.appcompat.widget.Toolbar
@@ -41,25 +47,38 @@ class Chatscreen : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chatscreen)
 
-
-
         progressBar=findViewById(R.id.progressbar)
         toolbar=findViewById(R.id.toolbar)
+        profile=findViewById(R.id.profile)
         setSupportActionBar(toolbar)
-
         swipeRefreshLayout=findViewById(R.id.swipe)
         mAuth= FirebaseAuth.getInstance()
-
         mDbref=FirebaseDatabase.getInstance().getReference()
-
-
         userList= ArrayList()
-        adapter=UserAdapter(this,userList)
-
+        adapter=UserAdapter(applicationContext,this,userList)
         RV = findViewById<RecyclerView>(R.id.rv)
         RV.layoutManager=LinearLayoutManager(this)
         RV.adapter=adapter;
 
+
+        var storageReference: StorageReference =
+            FirebaseStorage.getInstance().getReference("User/" + mAuth.currentUser?.uid + ".jpg")
+
+        val file = File.createTempFile("tempfile", "jpg")
+
+        storageReference.getFile(file).addOnSuccessListener {
+
+            Glide.with(this).load(file).placeholder(R.drawable.progress)
+                .into(profile)
+        }
+
+        profile.setOnClickListener{ View ->
+            val intent = Intent(this,Profile::class.java)
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+
+            startActivity(intent)
+
+        }
 
 
 
@@ -71,12 +90,7 @@ class Chatscreen : AppCompatActivity() {
 
 
 
-
-
-
-
     }
-
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu,menu)
@@ -86,25 +100,25 @@ class Chatscreen : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if(item.itemId==R.id.logout){
             Toast.makeText(this,"SIGNING OUT",Toast.LENGTH_SHORT).show()
-
             var sharedPreferences = getSharedPreferences("logindata", MODE_PRIVATE)
             sharedPreferences.edit().clear().commit()
-
             val counter = sharedPreferences.getBoolean("logincounter",(MODE_PRIVATE.toString().toBoolean()))
             if(!counter){
                 Log.d("Counter value" ,counter.toString())
+                var appUtil=AppUtil()
+                appUtil.updateOnlineStatus(this,"Offline")
                 mAuth.signOut()
                 var sharedPreferencetoken = getSharedPreferences("tokendata", MODE_PRIVATE)
                 sharedPreferencetoken .edit().clear().commit()
-                var appUtil=AppUtil()
-                appUtil.updateOnlineStatus(this,"Offline")
 
                 val intent = Intent(this,LOGIN::class.java)
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                startActivity(intent)
-            }
 
-          //  progressBar.visibility=View.INVISIBLE
+                startActivity(intent)
+                finish()
+        }
+
+          //progressBar.visibility=View.INVISIBLE
 
             return true
         }
@@ -123,7 +137,6 @@ class Chatscreen : AppCompatActivity() {
                     if (mAuth.currentUser?.uid !=currentUser?.uid){
                         userList.add(currentUser!!)
                     }
-
                 }
                 swipeRefreshLayout.isRefreshing =false
                 adapter.notifyDataSetChanged()
@@ -132,29 +145,21 @@ class Chatscreen : AppCompatActivity() {
             override fun onCancelled(error: DatabaseError) {
                 TODO("Not yet implemented")
             }
-
         })
 
     }
 
     override fun onPause() {
+
         super.onPause()
         var appUtil = AppUtil()
-        appUtil.updateOnlineStatus(this,"Offline")
+        appUtil.updateOnlineStatus(applicationContext,"Offline")
     }
 
-    override fun onResume() {
+    override fun onResume(){
         super.onResume()
         var appUtil = AppUtil()
         appUtil.updateOnlineStatus(this,"Online")
     }
-
-    override fun onBackPressed() {
-
-
-    }
-
-
-
 
 }

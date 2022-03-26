@@ -93,7 +93,7 @@ class Chat : AppCompatActivity() {
 
         storageReference.getFile(file).addOnSuccessListener {
 
-            Glide.with(this).load(file).placeholder(R.drawable.progress)
+            Glide.with(applicationContext).load(file).placeholder(R.drawable.progress)
                 .into(circleImageView)
 
         }
@@ -110,7 +110,6 @@ class Chat : AppCompatActivity() {
                 textView2.text=it.value.toString()
             }
         }
-
 
         /*  handler.postDelayed(Runnable {
               handler.postDelayed(runnable!!, delay.toLong())
@@ -129,16 +128,10 @@ class Chat : AppCompatActivity() {
                       }
                   }
 
-
-
               Toast.makeText(this, "This method will run every 5 seconds", Toast.LENGTH_SHORT).show()
           }.also { runnable = it }, delay.toLong())
 
-
-
   */
-
-
 
         RV2.layoutManager=LinearLayoutManager(this).apply {
             reverseLayout=false
@@ -151,21 +144,17 @@ class Chat : AppCompatActivity() {
         mdbref.child("chats").child(senderRoom!!).child("messages")
             .addValueEventListener(object:ValueEventListener{
                 override fun onDataChange(snapshot: DataSnapshot) {
-
                     messageList.clear()
                     for(postsnapshot in snapshot.children){
                         val message=postsnapshot.getValue(Message::class.java)
                         messageList.add(message!!)
                     }
-                    messageAdapter.notifyDataSetChanged()
-                }
-
+                    messageAdapter.notifyDataSetChanged() }
                 override fun onCancelled(error: DatabaseError) {
                     TODO("Not yet implemented")
                 }
 
             })
-
 
         sendbutton.setOnClickListener{
             //notification code her
@@ -174,14 +163,13 @@ class Chat : AppCompatActivity() {
             val text= message.text.toString()
             if(text.isEmpty()){
                 Toast.makeText(this,"Please Type a message",Toast.LENGTH_SHORT).show()
-
             }else{
-            val messageObject =Message(text,senderuid)
+
+            val messageObject=Message(text,senderuid)
             mdbref.child("chats").child(senderRoom!!).child("messages").push()
                 .setValue(messageObject).addOnSuccessListener {
                     mdbref.child("chats").child(recieverRoom!!).child("messages").push()
                         .setValue(messageObject)
-
                 }
             }
             RV2.smoothScrollToPosition(messageList.size)
@@ -189,20 +177,14 @@ class Chat : AppCompatActivity() {
             var sentname:String?=null
             mdbref.child("user").child(senderuid!!).child("name").get().addOnSuccessListener {
                 sentname=it.value.toString()
-
                 sendnotification(sentname!!,text,token!!)
             }.addOnFailureListener{
 
             }
 
-
         }
 
-
     }
-
-
-
 
 
     private fun sendnotification(name:String,message:String,token:String){
@@ -231,8 +213,6 @@ class Chat : AppCompatActivity() {
                 }) {
                 override fun getHeaders(): MutableMap<String, String> {
                     var key:String = "AAAAiwbOKCo:APA91bFzoIiti37TQGLtuW1iSCrUGxA7LZy9JOzQthGdlLiRjB9nLP3CgR3Y_F5cEVSkGzAIRHJf6k7YH7J6DdecLbJXQtD1-9Qfy9Lhinzt_Poikpwts-c03b4knW46BVdwBdw8BrU5"
-
-
                     val map: MutableMap<String, String> = HashMap()
 
                     map["Authorization"] = "key=" + key
