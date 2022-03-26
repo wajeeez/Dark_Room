@@ -35,8 +35,10 @@ class Chat : AppCompatActivity() {
     var handler: Handler = Handler()
     var runnable: Runnable? = null
     var delay = 5000
+
     private lateinit var RV2:RecyclerView
     private lateinit var message:EditText
+    private lateinit var back:ImageView
     private lateinit var sendbutton:ImageView
     private lateinit var messageAdapter: MessageAdapter
     private lateinit var messageList:ArrayList<Message>
@@ -46,16 +48,17 @@ class Chat : AppCompatActivity() {
     private lateinit var anim:LottieAnimationView
     private lateinit var circleImageView: CircleImageView
     var senderuid = FirebaseAuth.getInstance().currentUser?.uid
-
     private lateinit var mdbref:DatabaseReference
-
     var recieverRoom: String?=null
     var senderRoom: String?=null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
         mdbref = FirebaseDatabase.getInstance().getReference()
+
+
+
+
 
         val name = intent.getStringExtra("name")
         val uid = intent.getStringExtra("uid")
@@ -64,42 +67,34 @@ class Chat : AppCompatActivity() {
 
         senderRoom = uid+senderuid
         recieverRoom=senderuid+uid
-
-
         toolbar=findViewById(R.id.toolbar)
         textView=findViewById(R.id.user)
-
+        back=findViewById(R.id.back)
         textView2=findViewById(R.id.st)
         circleImageView=findViewById(R.id.prof)
 
 
         textView.text=name
         setSupportActionBar(toolbar)
-
-
-
         RV2 = findViewById(R.id.chatrv)
         message=findViewById(R.id.messagebox)
         sendbutton=findViewById(R.id.sendbtn)
-
         messageList= ArrayList()
         messageAdapter= MessageAdapter(this,messageList)
-
+        back.setOnClickListener { View->
+            finish()
+        }
 
 
         var storageReference: StorageReference = FirebaseStorage.getInstance().getReference("User/$uid.jpg")
-
         val file = File.createTempFile("tempfile","jpg")
-
         storageReference.getFile(file).addOnSuccessListener {
-
             Glide.with(applicationContext).load(file).placeholder(R.drawable.progress)
                 .into(circleImageView)
-
         }
 
-        var dbref = FirebaseDatabase.getInstance().getReference()
-        dbref.child("user").child(uid!!).child("status").get().addOnSuccessListener {
+                   var dbref = FirebaseDatabase.getInstance().getReference()
+            dbref.child("user").child(uid!!).child("status").get().addOnSuccessListener {
 
             if(it.value=="Offline"){
                 textView2.setTextColor(Color.parseColor("#4e6654"))
@@ -111,26 +106,21 @@ class Chat : AppCompatActivity() {
             }
         }
 
-        /*  handler.postDelayed(Runnable {
+        /*
+        handler.postDelayed(Runnable {
               handler.postDelayed(runnable!!, delay.toLong())
-
-
                   var dbref = FirebaseDatabase.getInstance().getReference()
                   dbref.child("user").child(uid!!).child("status").get().addOnSuccessListener {
-
                       if(it.value=="Offline"){
                           textView2.setTextColor(Color.parseColor("#4e6654"))
                           textView2.text=it.value.toString()
-
                       }else{
                           textView2.setTextColor(Color.parseColor("#4CAF50"))
                           textView2.text=it.value.toString()
                       }
                   }
-
               Toast.makeText(this, "This method will run every 5 seconds", Toast.LENGTH_SHORT).show()
           }.also { runnable = it }, delay.toLong())
-
   */
 
         RV2.layoutManager=LinearLayoutManager(this).apply {

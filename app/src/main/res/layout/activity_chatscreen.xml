@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="#1c1c1c"
+    android:background="#000715"
     android:layout_height="match_parent"
     tools:context=".Chatscreen">
 
@@ -23,7 +23,7 @@
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#151515"
+        android:background="#1c1c1c"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -32,7 +32,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:background="#1c1c1c">
+            android:background="#000710">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -54,7 +54,7 @@
                     android:layout_marginBottom="10dp"
                     android:layout_toEndOf="@+id/profile"
                     android:fontFamily="@font/alfont"
-                    android:text="CHATS"
+                    android:text="@string/chats"
                     android:textColor="#FFFFFF"
                     android:textSize="22sp"
                     android:textStyle="bold" />

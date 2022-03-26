@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#1C1C1C"
+    android:background="#000715"
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
@@ -13,7 +13,7 @@
         android:layout_marginTop="5dp"
 
         android:layout_marginEnd="12dp"
-        app:cardBackgroundColor="#1C1C1C"
+        app:cardBackgroundColor="#000715"
         app:cardCornerRadius="8dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
@@ -41,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="85dp"
                 android:layout_marginTop="2dp"
-                android:background="#1C1C1C"
+                android:background="#000715"
                 android:fontFamily="@font/alfont"
                 android:paddingStart="6dp"
                 android:text="Wajahat"

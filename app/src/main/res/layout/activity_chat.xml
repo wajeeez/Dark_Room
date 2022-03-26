@@ -8,7 +8,7 @@
 
 
     <com.google.android.material.appbar.AppBarLayout
-        android:background="#FFC107"
+        android:background="#000610"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -17,48 +17,76 @@
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
-            android:background="#FFC107"
             android:layout_width="match_parent"
-            android:layout_height="60dp">
-            <RelativeLayout
+            android:layout_height="70dp"
+            android:background="#000710">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/prof"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:layout_marginStart="12dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginEnd="5dp"
-                    android:layout_marginBottom="5dp" />
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="120dp"
+                    android:layout_marginBottom="10dp"
+                    android:src="@drawable/placeholder"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.555"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/user"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="70dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
                     android:fontFamily="@font/alfont"
                     android:text="USER NAME"
-                    android:textColor="#000"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textColor="#FFFF"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/prof"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.518" />
 
                 <TextView
                     android:id="@+id/st"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/user"
-                    android:layout_marginStart="70dp"
+                    android:layout_marginBottom="8dp"
                     android:fontFamily="@font/alfont"
                     android:paddingStart="3dp"
                     android:text="Offline"
                     android:textColor="#4CAF50"
-                    android:textSize="10sp" />
+                    android:textSize="10sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/user"
+                    app:layout_constraintTop_toBottomOf="@+id/user"
+                    app:layout_constraintVertical_bias="0.0" />
 
-            </RelativeLayout>
-
+                <ImageView
+                    android:id="@+id/back"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/back"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/prof"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"></ImageView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         </androidx.appcompat.widget.Toolbar>
@@ -72,17 +100,17 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/linear"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="60dp"
-        android:background="#000"
+        android:layout_marginTop="70dp"
+        android:layout_marginBottom="0dp"
+        android:background="#000715"
         android:paddingBottom="20dp" />
-
 
     <LinearLayout
         android:id="@+id/linear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="#000"
+        android:background="#000715"
         android:orientation="horizontal"
         android:weightSum="1">
 
@@ -92,14 +120,13 @@
             app:cardElevation="10dp"
             app:cardUseCompatPadding="true"
             android:layout_weight="2"
+            android:background="#000715"
             app:cardCornerRadius="8dp"
             android:padding="10dp">
-
-
             <LinearLayout
                 android:padding="8dp"
                 android:weightSum="1"
-                android:background="#333333"
+                android:background="#000715"
                 android:baselineAligned="false"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
@@ -121,18 +148,19 @@
                 android:paddingEnd="1dp"
                 android:textStyle="bold"
                 android:textSize="15dp"
-                android:textColor="#000"
-                android:textColorHint="#000000"
-                android:hint="Type a message..."></EditText>
+                android:textColor="#FFF"
+                android:textColorHint="#FFF"
+                android:hint="Type a message...">
+
+            </EditText>
         </LinearLayout>
                 <ImageView
                     android:id="@+id/sendbtn"
                     android:layout_weight="0"
-                    android:layout_width="40dp"
+                    android:layout_width="50dp"
                     android:padding="4dp"
                     android:layout_height="50dp"
                     android:src="@drawable/send">
-
                 </ImageView>
             </LinearLayout>
 
