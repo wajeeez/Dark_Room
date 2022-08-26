@@ -18,6 +18,7 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
@@ -89,8 +90,13 @@ class Chat : AppCompatActivity() {
         var storageReference: StorageReference = FirebaseStorage.getInstance().getReference("User/$uid.jpg")
         val file = File.createTempFile("tempfile","jpg")
         storageReference.getFile(file).addOnSuccessListener {
-            Glide.with(applicationContext).load(file).placeholder(R.drawable.progress)
+            Glide.with(applicationContext)
+                .load(file)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .placeholder(R.drawable.progress)
                 .into(circleImageView)
+
+
         }
 
                    var dbref = FirebaseDatabase.getInstance().getReference()

@@ -35,13 +35,15 @@ class UserAdapter(val c:Context,val context:Context, val userList:ArrayList<User
 // DATA ATTACHMENT
         val currentUser = userList[position]
         var dbref = FirebaseDatabase.getInstance().getReference()
-        dbref.child("user").child(currentUser.uid!!).child("status").get().addOnSuccessListener {
+       dbref.child("user").child(currentUser.uid!!).child("status").get().addOnSuccessListener {
+
+
             if (it.value == "Offline") {
-                holder.status.setTextColor(Color.parseColor("#4e6654"))
-                holder.status.text = it.value.toString()
+              holder.status.setTextColor(Color.parseColor("#4e6654"))
+              holder.status.text = it.value.toString()
             } else {
-                holder.status.setTextColor(Color.parseColor("#4CAF50"))
-                holder.status.text = it.value.toString()
+            holder.status.setTextColor(Color.parseColor("#4CAF50"))
+               holder.status.text = it.value.toString()
             }
         }
         holder.txtname.text = currentUser.name

@@ -21,6 +21,7 @@ import android.widget.Toast
 import android.widget.Toolbar
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.storage.FirebaseStorage
@@ -68,7 +69,10 @@ class Chatscreen : AppCompatActivity() {
 
         storageReference.getFile(file).addOnSuccessListener {
 
-            Glide.with(this).load(file).placeholder(R.drawable.progress)
+            Glide.with(this)
+                .load(file)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .placeholder(R.drawable.progress)
                 .into(profile)
         }
 

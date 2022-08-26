@@ -71,8 +71,13 @@ class Signup : AppCompatActivity() {
             val email = user.text.toString()
             val pass = pass.text.toString()
 
-            if(email.isEmpty() || pass.isEmpty()){
-                Toast.makeText(this,"FIELDS ARE EMPTY", Toast.LENGTH_SHORT).show()
+            if(email.isEmpty() || pass.isEmpty()) {
+                Toast.makeText(this, "FIELDS ARE EMPTY", Toast.LENGTH_SHORT).show()
+            }else if(pass.toString().length < 8){
+
+                Toast.makeText(this, "PASSWORD SHOULD BE 8 CHAR AT LEAST", Toast.LENGTH_SHORT).show()
+
+
             }else{
                 progressBar.visibility= View.VISIBLE
                 signup(uname,email,pass)
