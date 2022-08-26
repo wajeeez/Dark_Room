@@ -7,4 +7,4 @@ The app is developed for learning purpose using native android (Kotlin) and fire
 
 ## Screenshots
 
-![App Screenshot](https://github.com/wajeeez/Dark_Room/blob/master/New%20folder/Pic1.png)![App Screenshot](https://github.com/wajeeez/Dark_Room/blob/master/New%20folder/pic2.png)![App Screenshot](https://github.com/wajeeez/Dark_Room/blob/master/New%20folder/pic3.png)
+![App Screenshot](https://github.com/wajeeez/Dark_Room/blob/master/New%20folder/Pic1.png)![App Screenshot](https://github.com/wajeeez/Dark_Room/blob/master/New%20folder/pic4.png)![App Screenshot](https://github.com/wajeeez/Dark_Room/blob/master/New%20folder/pic3.png)
