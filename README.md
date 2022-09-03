@@ -1,5 +1,5 @@
 [![CI](https://github.com/wajeeez/Dark_Room/actions/workflows/main.yml/badge.svg)](https://github.com/wajeeez/Dark_Room/actions/workflows/main.yml)
-[![wakatime](https://wakatime.com/badge/github/wajeeez/Dark_Room.svg)](https://wakatime.com/badge/github/wajeeez/Dark_Room)
+
 
 
 # Dark Room 
