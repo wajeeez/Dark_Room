@@ -1,6 +1,3 @@
-https://github.com/<OWNER>/<REPOSITORY>/actions/workflows/<WORKFLOW_FILE>/badge.svg
-![example workflow](https://github.com/github/Dark_Room/actions/workflows/main.yml/badge.svg)
-
 # Dark Room 
 
 Dark Room is an android chat application can be used as a service provider for small community like college groups and amoung small teams of developers.
